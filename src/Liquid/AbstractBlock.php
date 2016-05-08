@@ -112,9 +112,18 @@ class AbstractBlock extends AbstractTag
 	 */
 	protected function renderAll(array $list, Context $context) {
 		$result = '';
-
-		foreach ($list as $token) {
-			$result .= (is_object($token) && method_exists($token, 'render')) ? $token->render($context) : $token;
+		foreach ($list as $key=>$token) {
+        		if((is_object($token) && method_exists($token, 'render'))){
+        			if(gettype($token->render($context))!='array'){
+        				$result .= $token->render($context);
+        			}
+	        		else {
+	        			$result .= 'Drop';
+	        		}
+        		}
+        		else {
+        			$result .= $token;
+        		}
 		}
 
 		return $result;
