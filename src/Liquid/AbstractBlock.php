@@ -118,7 +118,7 @@ class AbstractBlock extends AbstractTag
         				$result .= $token->render($context);
         			}
 	        		else {
-	        			$result .= 'Drop';
+	        			$result .= json_encode($token->render($context));
 	        		}
         		}
         		else {
